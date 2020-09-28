@@ -1,0 +1,101 @@
+\subsubsection*{Mathe}
+\begin{equation}\label{eq:successiveReturn}
+    \begin{aligned}
+    G_t &= R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots \\
+    &= R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + \gamma^2 R_{t+4} + \dots)  \\
+   & = R_{t+1} + \gamma G_{t+1}
+    \end{aligned}
+\end{equation}
+
+Zu jedem diskreten Zeitpunkt wird dem Agenten eine Belohnung in Form einer einfachen Zahl $R_t \in \mathbb{R}$ zugestellt.
+
+\begin{equation}\label{eq:greedyProbs}
+    \pi(a|S_t) =   
+        \begin{cases}
+            1-\epsilon + \epsilon / |\mathcal{A}(S_t)|      & \quad \text{wenn } a = A_* \\
+            \epsilon / |\mathcal{A}(S_t)|  & \quad \text{wenn } a \neq A_*
+        \end{cases}
+\end{equation}
+
+\begin{equation}\label{eq:wahrscheinlichkeitsverteilung}
+    \forall s \in \mathcal{S}: \forall a \in \mathcal{A}(s):
+\sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s', r \mid s,a) = 1 
+\end{equation}
+
+\begin{equation}\label{eq:übergangsfunktion}
+p(s',r \mid s,a) \doteq Pr\{S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a\},
+\end{equation}
+
+\begin{equation}\label{eq:valueFunction}
+    v_\pi(s) = \EX_\pi[G_t \mid S_t = s] = \EX_\pi \left[\sum_{k=0}^\infty{\gamma^k R_{t+k+1} \mid S_t = s} \right]
+\end{equation}
+
+\begin{equation}\label{eq:targets}
+\begin{aligned}
+v_\pi &= \EX_\pi\left[G_t \mid S_t = s \right] \\
+&= \EX_\pi\left[R_{t+1} + \gamma G_{t+1} \mid S_t = s \right] \\
+        &= \EX_\pi\left[R_{t+1} + \gamma v_\pi(S_{t+1}) \mid S_t = s \right]
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+    B_{2} =  \begin{bmatrix} 
+        FOOD\_DROP\_DOWN\_SUCCESS = +1\\
+        DEFAULT\_REWARD = -1          
+ \end{bmatrix}
+\end{equation}
+
+
+
+\begin{algorithm}
+    \caption{On-policy first-visit MC control (for $\epsilon$-soft policies), estimates $\pi \approx \pi_*$}
+    \begin{algorithmic}[1]
+        \State Algorithm parameter: small $\epsilon > 0$
+        \State Initialize:
+        \Indent
+           \State $\pi \gets$ an arbitary $\epsilon$-soft policy
+           \State $Q(s,a) \in \mathbb{R}$ (arbitrarily), for all $s \in \mathcal{S}, a \in \mathcal{A}(s)$
+           \State $Returns(s,a) \gets$ empty list, for all $s \in \mathcal{S}, a \in \mathcal{A}(s)$
+        \EndIndent
+        \State Repeat forever (for each episode):
+        \Indent
+            \State Generate an episode following $\pi: S_0, A_0, R_1, \dots, S_{T-1}, A_{T-1}, R_T$
+            \State $G \gets 0$
+            \State Loop for each step of episode, $t= T-1,T-2, \dots, 0:$
+            \Indent
+                \State $G \gets \gamma G + R_{t+1}$
+                \State Unless the pair $S_t, A_t$ appears in $S_0, A_0, S_1, A_1, \dots ,S_{t-1}, A_{t-1}:$
+                \Indent
+                    \State Append $G$ to $Returns(S_t,A_t)$
+                    \State $Q(S_t,A_t) \gets$ average$(Returns(S_t,A_t))$
+                    \State $A^* \gets \argmax_a Q(S_t, a)$ (with ties broken arbitrarily)
+                    \State For all $a \in \mathcal{A}(S_t):$
+                    \Indent
+                     \State  $\pi(a|S_t) =   
+                        \begin{cases}
+                            1-\epsilon + \epsilon / |\mathcal{A}(S_t)|      & \quad \text{if } a = A^* \\
+                            \epsilon / |\mathcal{A}(S_t)|  & \quad \text{if } a \neq A^*
+                        \end{cases}$
+                    \EndIndent
+                \EndIndent
+            \EndIndent
+        \EndIndent 
+    \end{algorithmic}
+\end{algorithm}
+
+
+\begin{lstlisting}[language=json,firstnumber=1, label=lst:ursprüngliche Wahrnehmung,caption=Wahrnehmung des Agenten bei dem ursprünglichen Problem]
+{
+    "state": "ALIVE",
+    "currentFood": 0,
+    "totalFood": 0,
+    "cell": {
+        "row": 0,
+        "col": 10,
+        "type": "START",
+        "food": 0,
+        "smell": 0,
+        "stench": 0
+    }
+}}
+\end{lstlisting}

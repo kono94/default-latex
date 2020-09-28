@@ -1,0 +1,141 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage[english,german]{babel}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[bottom=2cm]{geometry}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{eurosym}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage{scrpage2}%
+\usepackage[T1]{fontenc}% wichtig für Trennung von Wörtern mit Umlauten
+\usepackage{microtype}% verbesserter Randausgleich
+\setlength{\headheight}{21.4pt}
+\usepackage{apacite}
+\usepackage{natbib}
+\usepackage{eurosym}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{eucal}% Special characters
+\usepackage{amssymb}% math alphabet
+\usepackage[noend]{algpseudocode}
+\usepackage[utf8]{inputenc}
+
+%%% Math %%%
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator*{\argmax}{argmax}
+
+%%% Coding %%%
+\input{jsonDefinition}
+%Pseudo-code indent
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+
+%Pseudo-code indent
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+
+%%%% footer and header %%%%
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{2mm}
+
+\pagestyle{scrheadings}%  S
+\clearscrheadfoot% 
+\setheadwidth{text}%
+\automark{section}% 
+\ihead{\textbf{\pagemark}}
+\renewcommand{\sectionmark}[1]{\markright{\ #1}} 
+\ohead{\rightmark}
+\setheadsepline{0.5pt}
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+%%%% \footer and header %%%%
+
+% Funktion, um besser Anführungszeichen zu setzen.
+% Einfach \anf{Wort oder Text}
+\newcommand{\anf}[1]{
+\glqq #1\grqq{}
+}
+
+\begin{document}
+
+\begin{titlepage}
+\newgeometry{top=1cm, left=3cm, right=3cm}
+\begin{tabular}{lcr}
+  \hspace{10cm} &
+  \includegraphics[width=170px]{images/hb_logo_2c.jpg}
+  \vspace{1cm}
+\end{tabular}
+	\centering	
+	\vspace{1cm}
+	{\scshape\Large Small heading \par}
+	\vspace{1.5cm}
+	{\huge\bfseries Major Heading of the Project\par}
+    \vspace{2cm}
+    {\Large\itshape 
+        Italic block with detailed information about the project that should generally not exceed one sentence
+        	\par}
+	\vfill
+	\begin{tabularx}{\textwidth}{lX}
+		Autoren: & Name One (StudentID), Name Two (StudentID) \\
+		Prüfer: & Prof. Dr. Ing. Nice Prof, Prof. Dr. Bad Prof  \\
+		        
+	\end{tabularx}  
+    \vfill
+
+% Bottom of the page with current date
+	{\large \today \par}       
+\end{titlepage}
+\restoregeometry
+% Abstrakt bzw. Zusammenfassung ('*' macht, dass es nicht im Inhaltsverzeichnis auftaucht, aber trotzdem den Stil einer Überschrift hat
+\section*{Abstract}
+\input{chapter/abstract.tex}
+\pagebreak
+
+% Inhaltsverzeichnis
+\tableofcontents
+\pagebreak
+
+% Abbildungsverzeichnis
+\listoffigures
+\pagebreak
+\noindent
+
+
+\section{Einleitung} \label{sec:einleitung}
+\input{chapter/einleitung/einleitung}
+    \subsection{Zitieren}
+    \input{chapter/einleitung/zitieren}
+    \subsection{Bilder}
+    \input{chapter/einleitung/bilder}
+    \subsection{Mathe und Code} \label{sec:mathe}
+    \input{chapter/einleitung/mathe}
+    \subsection{Sonstiges} \label{sec:sonstiges}
+    \input{chapter/einleitung/sonstiges}
+\newpage
+\section{Fazit}
+\input{chapter/fazit/fazit}
+
+\newpage
+\bibliographystyle{apacite}
+\bibliography{quellen}
+\pagebreak
+
+\end{document}
+

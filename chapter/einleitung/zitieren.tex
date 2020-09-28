@@ -1,0 +1,25 @@
+Wie man zitiert. Für indirekte Zitate setzt man am Ende ganz einfach den Snippet: \begin{verbatim}
+\cite[]{anderie2018gamification}
+\end{verbatim}
+Selbst wenn keine Seitenanzahlen angegeben werden, müssen die einfachen Klammern nach dem cite-Befehl gesetzt werden, weil ein zusätzliches Package (natbib) eingebunden ist, welches passive Autorenzitierung erlaubt \cite[]{anderie2018gamification}. Für das Einbinden der Seitenanzahl, kann einfach in die eckigen Klammern geschrieben werden, z.B. \anf{S.\textasciitilde10f.}, dabei sorgt die Tilde für einen gleichbleibenden Abstand des Leerzeichens \cite[S.~10f.]{anderie2018gamification}. 
+\par 
+Wird über mehrere Sätze hinweg zitiert kann ein Trick angewendet werden. Dabei werden die Autoren direkt in die Sätze mit eingebunden und deren Aussagen über mehrere Sätze hin verknüpft. Beispiel:\par 
+\cite{Stef12} beschreiben in ihrer Arbeit drei grundsätzliche Konzepte, die allesamt eine Rolle in der Gamifizierung spielen. Die Autoren weisen darauf hin, dass vor allem das Konzept A die größte Bedeutung hat. Dennoch sind sie der Meinung, dass es in der nahen Zukunft zu einer großen Veränderung kommen wird, die sich hauptsächlich durch Grund B begründet lässt (S.~25ff.).
+\par 
+Diese Art der Zitierung kann erreicht werden, indem die eckigen Klammern entfernt werden:
+\begin{verbatim}
+\cite{Stef12}
+\end{verbatim}
+Die referenzierten Seiten werden einfach per Hand am Ende des Absatzes hinzugefügt.
+\par
+Bilder und Kapitel referenziert man ganz einfach mit:
+\begin{verbatim}
+\ref{fig:hslogoRight} 
+\ref{sec:mathe}
+
+Sind die Bezeichnungen der Label.
+\label{fig:hslogoRight}
+\end{verbatim}
+In Abbildung \ref{fig:hslogoRight} erkennt man...
+\par 
+Im Kapitel \ref{sec:sonstiges} wird beschrieben, dass
