@@ -43,7 +43,6 @@
 \algtext*{Indent}
 \algtext*{EndIndent}
 
-
 %Pseudo-code indent
 \algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
 \algtext*{Indent}
@@ -75,66 +74,25 @@
 
 \begin{document}
 
-\begin{titlepage}
-\newgeometry{top=1cm, left=3cm, right=3cm}
-\begin{tabular}{lcr}
-  \hspace{10cm} &
-  \includegraphics[width=170px]{images/hb_logo_2c.jpg}
-  \vspace{1cm}
-\end{tabular}
-	\centering	
-	\vspace{1cm}
-	{\scshape\Large Small heading \par}
-	\vspace{1.5cm}
-	{\huge\bfseries Major Heading of the Project\par}
-    \vspace{2cm}
-    {\Large\itshape 
-        Italic block with detailed information about the project that should generally not exceed one sentence
-        	\par}
-	\vfill
-	\begin{tabularx}{\textwidth}{lX}
-		Autoren: & Name One (StudentID), Name Two (StudentID) \\
-		Prüfer: & Prof. Dr. Ing. Nice Prof, Prof. Dr. Bad Prof  \\
-		        
-	\end{tabularx}  
-    \vfill
+\input{titlepage}
 
-% Bottom of the page with current date
-	{\large \today \par}       
-\end{titlepage}
-\restoregeometry
 % Abstrakt bzw. Zusammenfassung ('*' macht, dass es nicht im Inhaltsverzeichnis auftaucht, aber trotzdem den Stil einer Überschrift hat
 \section*{Abstract}
-\input{chapter/abstract.tex}
-\pagebreak
-
+\input{chapters/abstract.tex}
+\newpage
 % Inhaltsverzeichnis
 \tableofcontents
-\pagebreak
-
+\newpage
 % Abbildungsverzeichnis
 \listoffigures
-\pagebreak
+\newpage
 \noindent
 
-
-\section{Einleitung} \label{sec:einleitung}
-\input{chapter/einleitung/einleitung}
-    \subsection{Zitieren}
-    \input{chapter/einleitung/zitieren}
-    \subsection{Bilder}
-    \input{chapter/einleitung/bilder}
-    \subsection{Mathe und Code} \label{sec:mathe}
-    \input{chapter/einleitung/mathe}
-    \subsection{Sonstiges} \label{sec:sonstiges}
-    \input{chapter/einleitung/sonstiges}
-\newpage
-\section{Fazit}
-\input{chapter/fazit/fazit}
+\input{structure}
 
 \newpage
 \bibliographystyle{apacite}
-\bibliography{quellen}
+\bibliography{sources}
 \pagebreak
 
 \end{document}
